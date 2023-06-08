@@ -24,7 +24,7 @@ public class UserController {
     public ResponseEntity<ResponseWrapper> getUsers() {
 
         return ResponseEntity
-                .ok(new ResponseWrapper("All users retrieved",
+                .ok(new ResponseWrapper("All Users retrieved",
                         userService.listAllUsers(), HttpStatus.OK));
            // ^^ .ok shows OK Status in Postman tab, ^^ this also adds it in the Response Body
     }

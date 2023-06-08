@@ -25,7 +25,7 @@ public class ProjectController {
     public ResponseEntity<ResponseWrapper> getProjects() {
 
         return ResponseEntity
-                .ok(new ResponseWrapper("Projects retrieved",
+                .ok(new ResponseWrapper("All Projects retrieved",
                         projectService.listAllProjects(), HttpStatus.OK));
     }
 

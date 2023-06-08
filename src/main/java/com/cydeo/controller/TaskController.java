@@ -26,7 +26,7 @@ public class TaskController {
     public ResponseEntity<ResponseWrapper> getTasks() {
 
         return ResponseEntity
-                .ok(new ResponseWrapper("Tasks retrieved",
+                .ok(new ResponseWrapper("All Tasks retrieved",
                         taskService.listAllTasks(), HttpStatus.OK));
     }
 
