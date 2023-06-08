@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/api/v1/project")
 public class ProjectController {
@@ -19,6 +21,7 @@ public class ProjectController {
     }
 
     @GetMapping
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> getProjects() {
 
         return ResponseEntity
@@ -27,6 +30,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectCode}")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> getProjectByCode(
             @PathVariable("projectCode") String projectCode) {
 
@@ -36,6 +40,7 @@ public class ProjectController {
     }
 
     @PostMapping
+    @RolesAllowed({"Manager", "Admin"})
     public ResponseEntity<ResponseWrapper> createProject(@RequestBody ProjectDTO project) {
 
         projectService.save(project);
@@ -46,6 +51,7 @@ public class ProjectController {
     }
 
     @PutMapping
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> updateProject(@RequestBody ProjectDTO project) {
 
         projectService.update(project);
@@ -55,6 +61,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectCode}")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> deleteProject(
             @PathVariable("projectCode") String projectCode) {
 
@@ -65,6 +72,7 @@ public class ProjectController {
     }
 
     @GetMapping("/manager/project-status")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> getProjectByManager() {
 
         return ResponseEntity
@@ -74,6 +82,7 @@ public class ProjectController {
     }
 
     @PutMapping("/manager/complete/{projectCode}")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> managerCompleteProject(
             @PathVariable("projectCode") String projectCode) {
 

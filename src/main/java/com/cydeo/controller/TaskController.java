@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/api/v1/task")
 public class TaskController {
@@ -20,6 +22,7 @@ public class TaskController {
     }
 
     @GetMapping
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> getTasks() {
 
         return ResponseEntity
@@ -28,6 +31,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> getTaskById(@PathVariable("id") Long id) {
 
         return ResponseEntity
@@ -36,6 +40,7 @@ public class TaskController {
     }
 
     @PostMapping
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> createTask(@RequestBody TaskDTO task) {
 
         taskService.save(task);
@@ -46,6 +51,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> deleteTask(@PathVariable("id") Long id) {
 
         taskService.delete(id);
@@ -55,6 +61,7 @@ public class TaskController {
     }
 
     @PutMapping
+    @RolesAllowed("Manager")
     public ResponseEntity<ResponseWrapper> updateTask(@RequestBody TaskDTO task) {
 
         taskService.update(task);
@@ -64,6 +71,7 @@ public class TaskController {
     }
 
     @GetMapping("/employee/pending-tasks")
+    @RolesAllowed("Employee")
     public ResponseEntity<ResponseWrapper> employeePendingTasks() {
 
         return ResponseEntity
@@ -73,6 +81,7 @@ public class TaskController {
     }
 
     @PutMapping("/employee/update")
+    @RolesAllowed("Employee")
     public ResponseEntity<ResponseWrapper> employeeUpdateTasks(@RequestBody TaskDTO task) {
 
         taskService.update(task);
@@ -82,6 +91,7 @@ public class TaskController {
     }
 
     @GetMapping("/employee/archive")
+    @RolesAllowed("Employee")
     public ResponseEntity<ResponseWrapper> employeeArchiveTasks() {
 
         return ResponseEntity
