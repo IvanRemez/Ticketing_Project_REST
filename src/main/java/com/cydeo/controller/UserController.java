@@ -58,5 +58,4 @@ public class UserController {
         return ResponseEntity
                 .ok(new ResponseWrapper("User deleted", HttpStatus.OK));
     }
-
 }
